@@ -1,11 +1,11 @@
 #include "Integral.h"
 #include <math.h>
 
-Integral::Integral(TimeSource timeBase)
+Integral::Integral(ClockSource timeBase)
     : _timeConstant(1.0f), _rawValueDifference(0.0f), _processedValueDifference(0.0f), _outputValue(0.0f),
       _exponent(0.0f), _isRising(true), _previousTimeStamp(0), _timeBase(timeBase) {}
 
-Integral::Integral(float timeConstant, TimeSource timeBase)
+Integral::Integral(float timeConstant, ClockSource timeBase)
     : _timeConstant(timeConstant), _rawValueDifference(0.0f), _processedValueDifference(0.0f), _outputValue(0.0f),
       _exponent(0.0f), _isRising(true), _previousTimeStamp(0), _timeBase(timeBase) {}
 

@@ -4,7 +4,7 @@
 template <uint8_t OrderOfInertia>
 class Inertia {
  public:
-  Inertia(TimeSource timeBase) : _timeBase(timeBase), _orderOfInertia(OrderOfInertia) {}
+  Inertia(ClockSource timeBase) : _timeBase(timeBase), _orderOfInertia(OrderOfInertia) {}
   ~Inertia() {}
 
   void setTimeConstant(float timeConstant) {
@@ -28,7 +28,7 @@ class Inertia {
   }
 
  private:
-  TimeSource _timeBase;
+  ClockSource _timeBase;
   Integral _integralTerms[OrderOfInertia];
   const uint8_t _orderOfInertia;
 };

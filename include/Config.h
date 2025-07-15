@@ -2,4 +2,4 @@
 
 #include <stdint.h>
 
-using TimeSource = uint64_t (*)();
+using ClockSource = uint64_t (*)();

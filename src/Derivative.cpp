@@ -1,11 +1,11 @@
 #include "Derivative.h"
 #include <math.h>
 
-Derivative::Derivative(TimeSource timeBase)
+Derivative::Derivative(ClockSource timeBase)
     : _timeConstant(1.0f), _rawValueDifference(0.0f), _processedValueDifference(0.0f), _outputValue(0.0f),
       _exponent(0.0f), _previousTimeStamp(0), _timeBase(timeBase) {}
 
-Derivative::Derivative(float timeConstant, TimeSource timeBase)
+Derivative::Derivative(float timeConstant, ClockSource timeBase)
     : _timeConstant(timeConstant), _rawValueDifference(0.0f), _processedValueDifference(0.0f), _outputValue(0.0f),
       _exponent(0.0f), _previousTimeStamp(0), _timeBase(timeBase) {}
 

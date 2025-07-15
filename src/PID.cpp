@@ -1,15 +1,15 @@
 #include "PID.h"
 
-PID::PID(TimeSource timeBase)
+PID::PID(ClockSource timeBase)
     : _propotionalGain(1.0f), _integralGain(1.0f), _derivativeGain(1.0f), _timeBase(timeBase) {}
 
-PID::PID(float propotionalGain, TimeSource timeBase)
+PID::PID(float propotionalGain, ClockSource timeBase)
     : _propotionalGain(propotionalGain), _integralGain(1.0f), _derivativeGain(1.0f), _timeBase(timeBase) {}
 
-PID::PID(float propotionalGain, float integralGain, TimeSource timeBase)
+PID::PID(float propotionalGain, float integralGain, ClockSource timeBase)
     : _propotionalGain(propotionalGain), _integralGain(integralGain), _derivativeGain(1.0f), _timeBase(timeBase) {}
 
-PID::PID(float propotionalGain, float integralGain, float derivativeGain, TimeSource timeBase)
+PID::PID(float propotionalGain, float integralGain, float derivativeGain, ClockSource timeBase)
     : _propotionalGain(propotionalGain), _integralGain(integralGain), _derivativeGain(derivativeGain),
       _timeBase(timeBase) {}
 

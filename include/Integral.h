@@ -3,8 +3,8 @@
 
 class Integral {
  public:
-  explicit Integral(TimeSource timeBase);
-  explicit Integral(float timeConstant, TimeSource timeBase);
+  explicit Integral(ClockSource timeBase);
+  explicit Integral(float timeConstant, ClockSource timeBase);
 
   float update(float rawInputValue);
   void setTimeConstant(float timeConstant);
@@ -20,6 +20,6 @@ class Integral {
   bool _isRising;
   uint64_t _previousTimeStamp;
 
-  TimeSource _timeBase;
+  ClockSource _timeBase;
   static constexpr float _INVERSE_EULER = 0.368f; // inverse euler
 };

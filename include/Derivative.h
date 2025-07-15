@@ -3,8 +3,8 @@
 
 class Derivative {
  public:
-  explicit Derivative(TimeSource timeBase);
-  explicit Derivative(float timeConstant, TimeSource timeBase);
+  explicit Derivative(ClockSource timeBase);
+  explicit Derivative(float timeConstant, ClockSource timeBase);
 
   float update(float rawInputValue);
   void setTimeConstant(float timeConstant);
@@ -21,5 +21,5 @@ class Derivative {
   float _difference;
   uint64_t _previousTimeStamp;
 
-  TimeSource _timeBase;
+  ClockSource _timeBase;
 };
