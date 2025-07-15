@@ -1,7 +1,5 @@
 #pragma once
 
-#include <memory>
-#include <vector>
 #include "Config.h"
 
 class Integral {
@@ -56,21 +54,39 @@ class Derivative {
   TimeSource _timeBase;
 };
 
+template <uint8_t OrderOfInertia>
 class Inertia {
  public:
-  Inertia() {}
-  Inertia(TimeSource timeBase) : _timeBase(timeBase) {}
+  Inertia() : _orderOfInertia(OrderOfInertia) {}
+  Inertia(TimeSource timeBase) : _timeBase(timeBase), _orderOfInertia(OrderOfInertia) {}
   ~Inertia() {}
 
-  void setTimeBase(TimeSource timeBase);
-  void setTimeConstant(float timeConstant);
-  void setOrderOfInertia(uint8_t orderOfInertia);
-  float update(float rawInputValue);
-  void reset();
+  void setTimeBase(TimeSource timeBase) { _timeBase = timeBase; }
+
+  void setTimeConstant(float timeConstant) {
+    for (auto& integral : _integralTerms) {
+      integral.setTimeConstant(timeConstant);
+    }
+  }
+
+  float update(float rawInputValue) {
+    float inputValue = rawInputValue;
+    for (auto& integral : _integralTerms) {
+      inputValue = integral.update(inputValue);
+    }
+    return inputValue;
+  }
+
+  void reset() {
+    for (auto& integral : _integralTerms) {
+      integral.reset();
+    }
+  }
 
  private:
   TimeSource _timeBase;
-  std::vector<Integral> _integralTerms;
+  Integral _integralTerms[OrderOfInertia];
+  const uint8_t _orderOfInertia;
 };
 
 class PID {

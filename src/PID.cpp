@@ -130,31 +130,3 @@ float Derivative::update(float rawInputValue) {
 }
 
 void Derivative::setTimeConstant(float timeConstant) { _timeConstant = timeConstant; }
-
-void Inertia::setTimeBase(TimeSource timeBase) { _timeBase = timeBase; }
-
-void Inertia::setTimeConstant(float timeConstant) {
-  for (auto& integral : _integralTerms) {
-    integral.setTimeConstant(timeConstant);
-  }
-}
-
-void Inertia::setOrderOfInertia(uint8_t orderOfInertia) {
-  for (uint8_t i = 0; i < orderOfInertia; i++) {
-    _integralTerms.emplace_back(_timeBase);
-  }
-}
-
-float Inertia::update(float rawInputValue) {
-  float inputValue = rawInputValue;
-  for (auto& integral : _integralTerms) {
-    inputValue = integral.update(inputValue);
-  }
-  return inputValue;
-}
-
-void Inertia::reset() {
-  for (auto& integral : _integralTerms) {
-    integral.reset();
-  }
-}
