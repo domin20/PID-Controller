@@ -21,28 +21,14 @@ void PID::setIntegralTimeConstant(float timeConstant) { _integral.setTimeConstan
 void PID::setDerivativeTimeConstant(float timeConstant) { _derivative.setTimeConstant(timeConstant); }
 
 float PID::update(float error) {
-  float controlSignal;
-
-  // variables for integral term ..
-  static float inputValueIt = 0.0f;
-  static float outputValueIt = 0.0f;
-
-  // variables for derivative term..
-  static float inputValueDt = 0.0f;
-  static float outputValueDt = 0.0f;
-
   // ******************* INTEGRAL TERM *********************
   inputValueIt = error * _integralGain;
-  outputValueIt = integralUpdate(inputValueIt);
+  outputValueIt = _integral.update(inputValueIt);
 
   // ******************* DERIVATIVE TERM *********************
   inputValueDt = error * _derivativeGain;
-  outputValueDt = derivativeUpdate(inputValueDt);
+  outputValueDt = _derivative.update(inputValueDt);
 
-  controlSignal = _propotionalGain * error + outputValueIt + outputValueDt;
+  float controlSignal = _propotionalGain * error + outputValueIt + outputValueDt;
   return controlSignal;
 }
-
-float PID::integralUpdate(float inputValue) { return _integral.update(inputValue); }
-
-float PID::derivativeUpdate(float inputValue) { return _derivative.update(inputValue); }

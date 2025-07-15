@@ -17,13 +17,17 @@ class PID {
   float update(float error);
 
  private:
-  float integralUpdate(float inuptValue);
-  float derivativeUpdate(float inputValue);
-
- private:
   float _propotionalGain;
   float _integralGain;
   float _derivativeGain;
+
+  // variables for integral term ..
+  float inputValueIt = 0.0f;
+  float outputValueIt = 0.0f;
+
+  // variables for derivative term..
+  float inputValueDt = 0.0f;
+  float outputValueDt = 0.0f;
 
   Integral _integral;
   Derivative _derivative;
