@@ -4,6 +4,7 @@ A lightweight, clean C++ library implementing a PID (Proportional-Integral-Deriv
 
 ## Project Structure
 
+```bash
 pid-controller/
 ├── include/ # Headers
 │ ├── PID.h
@@ -12,6 +13,7 @@ pid-controller/
 │ └── PID.cpp
 ├── CMakeLists.txt
 └── README.md
+```
 
 ## API Overview
 
