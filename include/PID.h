@@ -5,10 +5,10 @@
 
 class PID {
  public:
-  explicit PID(ClockSource timeBase);
-  explicit PID(float propotionalGain, ClockSource timeBase);
-  PID(float propotionalGain, float integralGain, ClockSource timeBase);
-  PID(float propotionalGain, float integralGain, float derivativeGain, ClockSource timeBase);
+  explicit PID(ClockSource clockSource);
+  explicit PID(float propotionalGain, ClockSource clockSource);
+  PID(float propotionalGain, float integralGain, ClockSource clockSource);
+  PID(float propotionalGain, float integralGain, float derivativeGain, ClockSource clockSource);
   ~PID() {};
 
   void setIntegralTimeConstant(float timeConstant);
@@ -25,7 +25,6 @@ class PID {
   float _integralGain;
   float _derivativeGain;
 
-  ClockSource _timeBase;
-  Integral _integral = Integral(_timeBase);
-  Derivative _derivative = Derivative(_timeBase);
+  Integral _integral;
+  Derivative _derivative;
 };

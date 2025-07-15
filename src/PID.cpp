@@ -1,17 +1,20 @@
 #include "PID.h"
 
-PID::PID(ClockSource timeBase)
-    : _propotionalGain(1.0f), _integralGain(1.0f), _derivativeGain(1.0f), _timeBase(timeBase) {}
+PID::PID(ClockSource clockSource)
+    : _propotionalGain(1.0f), _integralGain(1.0f), _derivativeGain(1.0f), _integral(clockSource),
+      _derivative(clockSource) {}
 
-PID::PID(float propotionalGain, ClockSource timeBase)
-    : _propotionalGain(propotionalGain), _integralGain(1.0f), _derivativeGain(1.0f), _timeBase(timeBase) {}
+PID::PID(float propotionalGain, ClockSource clockSource)
+    : _propotionalGain(propotionalGain), _integralGain(1.0f), _derivativeGain(1.0f), _integral(clockSource),
+      _derivative(clockSource) {}
 
-PID::PID(float propotionalGain, float integralGain, ClockSource timeBase)
-    : _propotionalGain(propotionalGain), _integralGain(integralGain), _derivativeGain(1.0f), _timeBase(timeBase) {}
+PID::PID(float propotionalGain, float integralGain, ClockSource clockSource)
+    : _propotionalGain(propotionalGain), _integralGain(integralGain), _derivativeGain(1.0f), _integral(clockSource),
+      _derivative(clockSource) {}
 
-PID::PID(float propotionalGain, float integralGain, float derivativeGain, ClockSource timeBase)
+PID::PID(float propotionalGain, float integralGain, float derivativeGain, ClockSource clockSource)
     : _propotionalGain(propotionalGain), _integralGain(integralGain), _derivativeGain(derivativeGain),
-      _timeBase(timeBase) {}
+      _integral(clockSource), _derivative(clockSource) {}
 
 void PID::setIntegralTimeConstant(float timeConstant) { _integral.setTimeConstant(timeConstant); }
 

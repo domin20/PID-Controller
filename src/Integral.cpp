@@ -1,20 +1,24 @@
 #include "Integral.h"
 #include <math.h>
 
-Integral::Integral(ClockSource timeBase)
+Integral::Integral()
     : _timeConstant(1.0f), _rawValueDifference(0.0f), _processedValueDifference(0.0f), _outputValue(0.0f),
-      _exponent(0.0f), _isRising(true), _previousTimeStamp(0), _timeBase(timeBase) {}
+      _exponent(0.0f), _isRising(true), _previousTimeStamp(0), _clockSource() {}
 
-Integral::Integral(float timeConstant, ClockSource timeBase)
+Integral::Integral(ClockSource clockSource)
+    : _timeConstant(1.0f), _rawValueDifference(0.0f), _processedValueDifference(0.0f), _outputValue(0.0f),
+      _exponent(0.0f), _isRising(true), _previousTimeStamp(0), _clockSource(clockSource) {}
+
+Integral::Integral(float timeConstant, ClockSource clockSource)
     : _timeConstant(timeConstant), _rawValueDifference(0.0f), _processedValueDifference(0.0f), _outputValue(0.0f),
-      _exponent(0.0f), _isRising(true), _previousTimeStamp(0), _timeBase(timeBase) {}
+      _exponent(0.0f), _isRising(true), _previousTimeStamp(0), _clockSource(clockSource) {}
 
 float Integral::update(float rawInputValue) {
-  if (!_timeBase) {
+  if (!_clockSource) {
     return 0;
   }
-  _exponent = (_timeBase() - _previousTimeStamp) / (_timeConstant * 1000.0f);
-  _previousTimeStamp = _timeBase();
+  _exponent = (_clockSource() - _previousTimeStamp) / (_timeConstant * 1000.0f);
+  _previousTimeStamp = _clockSource();
   if (rawInputValue >= _outputValue) {
     _isRising = true;
   } else {
@@ -32,6 +36,8 @@ float Integral::update(float rawInputValue) {
   }
   return _outputValue;
 }
+
+void Integral::setClockSource(ClockSource clockSource) { _clockSource = clockSource; }
 
 void Integral::setTimeConstant(float timeConstant) { _timeConstant = timeConstant; }
 
