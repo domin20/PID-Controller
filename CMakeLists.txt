@@ -10,8 +10,6 @@ target_include_directories(pid-controller
         $<INSTALL_INTERFACE:include>
 )
 
-target_compile_features(pid-controller PUBLIC cxx_std_17)
-
 target_compile_options(pid-controller PRIVATE
     -Wall -Wextra -Wpedantic
 )
