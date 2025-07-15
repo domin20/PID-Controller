@@ -13,17 +13,11 @@ PID::PID(float propotionalGain, float integralGain, float derivativeGain, TimeSo
     : _propotionalGain(propotionalGain), _integralGain(integralGain), _derivativeGain(derivativeGain),
       _timeBase(timeBase) {}
 
-void PID::pidInit(float propotionalGain, float integralGain, float derivativeGain) {
-  _propotionalGain = propotionalGain;
-  _integralGain = integralGain;
-  _derivativeGain = derivativeGain;
-}
-
 void PID::setIntegralTimeConstant(float timeConstant) { _integral.setTimeConstant(timeConstant); }
 
 void PID::setDerivativeTimeConstant(float timeConstant) { _derivative.setTimeConstant(timeConstant); }
 
-float PID::pidUpdate(float error) {
+float PID::update(float error) {
   float controlSignal;
 
   // variables for integral term ..

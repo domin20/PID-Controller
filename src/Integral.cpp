@@ -1,10 +1,6 @@
 #include "Integral.h"
 #include <math.h>
 
-Integral::Integral()
-    : _timeConstant(1.0f), _rawValueDifference(0.0f), _processedValueDifference(0.0f), _outputValue(0.0f),
-      _exponent(0.0f), _isRising(true), _previousTimeStamp(0), _timeBase() {}
-
 Integral::Integral(TimeSource timeBase)
     : _timeConstant(1.0f), _rawValueDifference(0.0f), _processedValueDifference(0.0f), _outputValue(0.0f),
       _exponent(0.0f), _isRising(true), _previousTimeStamp(0), _timeBase(timeBase) {}
@@ -12,8 +8,6 @@ Integral::Integral(TimeSource timeBase)
 Integral::Integral(float timeConstant, TimeSource timeBase)
     : _timeConstant(timeConstant), _rawValueDifference(0.0f), _processedValueDifference(0.0f), _outputValue(0.0f),
       _exponent(0.0f), _isRising(true), _previousTimeStamp(0), _timeBase(timeBase) {}
-
-void Integral::setTimeBase(TimeSource timeBase) { _timeBase = timeBase; }
 
 float Integral::update(float rawInputValue) {
   if (!_timeBase) {

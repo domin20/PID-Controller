@@ -3,11 +3,8 @@
 
 class Integral {
  public:
-  explicit Integral();
   explicit Integral(TimeSource timeBase);
   explicit Integral(float timeConstant, TimeSource timeBase);
-
-  void setTimeBase(TimeSource timeBase);
 
   float update(float rawInputValue);
   void setTimeConstant(float timeConstant);

@@ -1,10 +1,6 @@
 #include "Derivative.h"
 #include <math.h>
 
-Derivative::Derivative()
-    : _timeConstant(1.0f), _rawValueDifference(0.0f), _processedValueDifference(0.0f), _outputValue(0.0f),
-      _exponent(0.0f), _previousTimeStamp(0), _timeBase() {}
-
 Derivative::Derivative(TimeSource timeBase)
     : _timeConstant(1.0f), _rawValueDifference(0.0f), _processedValueDifference(0.0f), _outputValue(0.0f),
       _exponent(0.0f), _previousTimeStamp(0), _timeBase(timeBase) {}
@@ -12,8 +8,6 @@ Derivative::Derivative(TimeSource timeBase)
 Derivative::Derivative(float timeConstant, TimeSource timeBase)
     : _timeConstant(timeConstant), _rawValueDifference(0.0f), _processedValueDifference(0.0f), _outputValue(0.0f),
       _exponent(0.0f), _previousTimeStamp(0), _timeBase(timeBase) {}
-
-void Derivative::setTimeBase(TimeSource timeBase) { _timeBase = timeBase; }
 
 float Derivative::update(float rawInputValue) {
   if (!_timeBase) {

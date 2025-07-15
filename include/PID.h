@@ -13,9 +13,8 @@ class PID {
 
   void setIntegralTimeConstant(float timeConstant);
   void setDerivativeTimeConstant(float timeConstant);
-  void pidInit(float propotionalGain, float integralGain, float derivativeGain);
 
-  float pidUpdate(float error);
+  float update(float error);
 
  private:
   float integralUpdate(float inuptValue);
