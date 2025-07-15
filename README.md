@@ -7,10 +7,16 @@ A lightweight, clean C++ library implementing a PID (Proportional-Integral-Deriv
 ```bash
 pid-controller/
 ├── include/ # Headers
-│ ├── PID.h
-│ └── Config.h
+│ ├── Config.h
+│ ├── Derivative.h
+│ ├── Inertia.h
+│ ├── Integral.h
+│ └── PID.h
 ├── src/ # Impl
+│ ├── Derivative.cpp
+│ ├── Integral.cpp
 │ └── PID.cpp
+├── .gitignore
 ├── CMakeLists.txt
 └── README.md
 ```
