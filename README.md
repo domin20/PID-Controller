@@ -25,7 +25,7 @@ pid-controller/
 
 - `PID` — Main controller class
 - `Integral`, `Derivative`, `Inertia` — Internal components
-- `TimeSource` — A function pointer: `using TimeSource = uint64_t (*)();`  
+- `ClockSource` — A function pointer: `using ClockSource = uint64_t (*)();`  
   Should return current time in **milliseconds**
 
 ## Quick Start
