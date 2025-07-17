@@ -11,12 +11,8 @@ class Derivative {
 
  private:
   float _timeConstant;
-  float _rawValueDifference;
-  float _processedValueDifference;
-  float _previousRawInputValue;
+  float _previousInput;
   float _outputValue;
-  float _exponent;
-  float _difference;
   uint64_t _previousTimeStamp;
 
   ClockSource _clockSource;
