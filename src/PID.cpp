@@ -22,12 +22,10 @@ void PID::setDerivativeTimeConstant(float timeConstant) { _derivative.setTimeCon
 
 float PID::update(float error) {
   // ******************* INTEGRAL TERM *********************
-  _inputValueIt = error * _integralGain;
-  _outputValueIt = _integral.update(_inputValueIt);
+  _outputValueIt = _integralGain * _integral.update(error);
 
   // ******************* DERIVATIVE TERM *********************
-  _inputValueDt = error * _derivativeGain;
-  _outputValueDt = _derivative.update(_inputValueDt);
+  _outputValueDt = _derivativeGain * _derivative.update(error);
 
   float controlSignal = _proportionalGain * error + _outputValueIt + _outputValueDt;
   return controlSignal;
