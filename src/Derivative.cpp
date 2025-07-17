@@ -2,31 +2,33 @@
 #include <math.h>
 
 Derivative::Derivative(ClockSource clockSource)
-    : _timeConstant(1.0f), _rawValueDifference(0.0f), _processedValueDifference(0.0f), _outputValue(0.0f),
-      _exponent(0.0f), _previousTimeStamp(0), _clockSource(clockSource) {}
+    : _timeConstant(1.0f), _outputValue(0.0f), _previousTimeStamp(0), _clockSource(clockSource) {}
 
 Derivative::Derivative(float timeConstant, ClockSource clockSource)
-    : _timeConstant(timeConstant), _rawValueDifference(0.0f), _processedValueDifference(0.0f), _outputValue(0.0f),
-      _exponent(0.0f), _previousTimeStamp(0), _clockSource(clockSource) {}
+    : _timeConstant(timeConstant), _outputValue(0.0f), _previousTimeStamp(0), _clockSource(clockSource) {}
 
 float Derivative::update(float rawInputValue) {
-  if (!_clockSource) {
-    return 0;
+  if (_previousTimeStamp == 0) {
+    _previousTimeStamp = _clockSource();
+    _previousInput = rawInputValue;
+    return 0.0f;
   }
-  _exponent = (_clockSource() - _previousTimeStamp) / (_timeConstant * 1000.0f);
 
-  _previousTimeStamp = _clockSource();
-  _difference = rawInputValue - _previousRawInputValue;
-  _outputValue += _difference;
+  uint64_t currentTime = _clockSource();
+  float deltaTime = (currentTime - _previousTimeStamp) / 1000.0f; // sekundy
+  _previousTimeStamp = currentTime;
 
-  if (_outputValue >= 0.0f) {
-    _processedValueDifference = _outputValue * (1.0f - pow(INVERSE_EULER, _exponent));
-    _outputValue -= _processedValueDifference;
-  } else {
-    _processedValueDifference = _rawValueDifference * (1.0f - pow(INVERSE_EULER, _exponent));
-    _outputValue += _processedValueDifference;
+  if (deltaTime <= 0.0f) {
+    return _outputValue;
   }
-  _previousRawInputValue = rawInputValue;
+
+  float derivative = (rawInputValue - _previousInput) / deltaTime;
+  _previousInput = rawInputValue;
+
+  // Wygładzanie wykładnicze (filtr LPF)
+  float alpha = 1.0f - expf(-deltaTime / _timeConstant);
+  _outputValue += alpha * (derivative - _outputValue);
+
   return _outputValue;
 }
 
