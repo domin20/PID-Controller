@@ -15,7 +15,7 @@ float Derivative::update(float rawInputValue) {
   }
 
   uint64_t currentTime = _clockSource();
-  float deltaTime = (currentTime - _previousTimeStamp) / 1000.0f; // sekundy
+  float deltaTime = (currentTime - _previousTimeStamp) / 1000.0f;
   _previousTimeStamp = currentTime;
 
   if (deltaTime <= 0.0f) {

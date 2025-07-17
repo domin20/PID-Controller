@@ -5,7 +5,6 @@ class Integral {
  public:
   explicit Integral();
   explicit Integral(ClockSource clockSource);
-  explicit Integral(float timeConstant, ClockSource clockSource);
 
   float update(float rawInputValue);
 
@@ -14,10 +13,7 @@ class Integral {
   void reset();
 
  private:
-  float _timeConstant;
-  float _processedValueDifference;
   float _outputValue;
-  float _exponent;
   uint64_t _previousTimeStamp;
 
   ClockSource _clockSource;
