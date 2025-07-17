@@ -15,12 +15,9 @@ class Integral {
 
  private:
   float _timeConstant;
-  float _rawValueDifference;
   float _processedValueDifference;
   float _outputValue;
   float _exponent;
-
-  bool _isRising;
   uint64_t _previousTimeStamp;
 
   ClockSource _clockSource;
