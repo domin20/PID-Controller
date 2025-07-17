@@ -27,11 +27,11 @@ float Integral::update(float rawInputValue) {
 
   if (_isRising) {
     _rawValueDifference = rawInputValue - _outputValue;
-    _processedValueDifference = _rawValueDifference * (1.0f - pow(_INVERSE_EULER, _exponent));
+    _processedValueDifference = _rawValueDifference * (1.0f - pow(INVERSE_EULER, _exponent));
     _outputValue += _processedValueDifference;
   } else {
     _rawValueDifference = _outputValue - rawInputValue;
-    _processedValueDifference = _rawValueDifference * (1.0f - pow(_INVERSE_EULER, _exponent));
+    _processedValueDifference = _rawValueDifference * (1.0f - pow(INVERSE_EULER, _exponent));
     _outputValue -= _processedValueDifference;
   }
   return _outputValue;

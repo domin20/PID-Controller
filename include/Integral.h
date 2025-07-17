@@ -24,5 +24,4 @@ class Integral {
   uint64_t _previousTimeStamp;
 
   ClockSource _clockSource;
-  static constexpr float _INVERSE_EULER = 0.368f; // inverse euler
 };

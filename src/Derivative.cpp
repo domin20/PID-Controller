@@ -20,10 +20,10 @@ float Derivative::update(float rawInputValue) {
   _outputValue += _difference;
 
   if (_outputValue >= 0.0f) {
-    _processedValueDifference = _outputValue * (1.0f - pow(_INVERSE_EULER, _exponent));
+    _processedValueDifference = _outputValue * (1.0f - pow(INVERSE_EULER, _exponent));
     _outputValue -= _processedValueDifference;
   } else {
-    _processedValueDifference = _rawValueDifference * (1.0f - pow(_INVERSE_EULER, _exponent));
+    _processedValueDifference = _rawValueDifference * (1.0f - pow(INVERSE_EULER, _exponent));
     _outputValue += _processedValueDifference;
   }
   _previousRawInputValue = rawInputValue;

@@ -22,12 +22,12 @@ class PID {
   float _derivativeGain;
 
   // variables for integral term ..
-  float inputValueIt = 0.0f;
-  float outputValueIt = 0.0f;
+  float _inputValueIt = 0.0f;
+  float _outputValueIt = 0.0f;
 
   // variables for derivative term..
-  float inputValueDt = 0.0f;
-  float outputValueDt = 0.0f;
+  float _inputValueDt = 0.0f;
+  float _outputValueDt = 0.0f;
 
   Integral _integral;
   Derivative _derivative;

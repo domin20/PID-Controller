@@ -10,8 +10,6 @@ class Derivative {
   void setTimeConstant(float timeConstant);
 
  private:
-  static const float _INVERSE_EULER; // inverse euler
-
   float _timeConstant;
   float _rawValueDifference;
   float _processedValueDifference;
