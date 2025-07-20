@@ -9,6 +9,8 @@ class Derivative {
   float update(float rawInputValue);
   void setTimeConstant(float timeConstant);
 
+  float getOutputValue();
+
  private:
   float _timeConstant;
   float _previousInput;

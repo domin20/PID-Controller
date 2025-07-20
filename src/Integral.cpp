@@ -32,4 +32,6 @@ void Integral::setIntegralLimits(float min, float max) {
   _isLimitSet = true;
 }
 
+float Integral::getOutputValue() { return _outputValue; }
+
 void Integral::reset() { _outputValue = 0; }

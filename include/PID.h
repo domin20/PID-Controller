@@ -11,11 +11,11 @@ class PID {
   PID(float proportionalGain, float integralGain, float derivativeGain, ClockSource clockSource);
   ~PID() {};
 
+  void setIntegralLimits(float min, float max);
   void setDerivativeTimeConstant(float timeConstant);
 
-  float getProportionalTerm() { return _proportionalTermValue; }
-  float getIntegralTerm() { return _integralTermValue; }
-  float getDerivativeTerm() { return _derivativeTermValue; }
+  float getIntegralTermValue() { return _integral.getOutputValue(); }
+  float getDerivativeTermValue() { return _derivative.getOutputValue(); }
 
   float update(float error);
 
@@ -24,9 +24,9 @@ class PID {
   float _integralGain;
   float _derivativeGain;
 
-  float _proportionalTermValue = 0.0f;
-  float _integralTermValue = 0.0f;
-  float _derivativeTermValue = 0.0f;
+  float _proportionalTermResultValue = 0.0f;
+  float _integralTermResultValue = 0.0f;
+  float _derivativeTermResultValue = 0.0f;
 
   Integral _integral;
   Derivative _derivative;

@@ -16,17 +16,19 @@ PID::PID(float propotionalGain, float integralGain, float derivativeGain, ClockS
     : _proportionalGain(propotionalGain), _integralGain(integralGain), _derivativeGain(derivativeGain),
       _integral(clockSource), _derivative(clockSource) {}
 
+void PID::setIntegralLimits(float min, float max) { _integral.setIntegralLimits(min, max); }
+
 void PID::setDerivativeTimeConstant(float timeConstant) { _derivative.setTimeConstant(timeConstant); }
 
 float PID::update(float error) {
-  _proportionalTermValue = _proportionalGain * error;
+  _proportionalTermResultValue = _proportionalGain * error;
 
   // ******************* INTEGRAL TERM *********************
-  _integralTermValue = _integralGain * _integral.update(error);
+  _integralTermResultValue = _integralGain * _integral.update(error);
 
   // ******************* DERIVATIVE TERM *********************
-  _derivativeTermValue = _derivativeGain * _derivative.update(error);
+  _derivativeTermResultValue = _derivativeGain * _derivative.update(error);
 
-  float controlSignal = _proportionalTermValue + _integralTermValue + _derivativeTermValue;
+  float controlSignal = _proportionalTermResultValue + _integralTermResultValue + _derivativeTermResultValue;
   return controlSignal;
 }
