@@ -14,9 +14,22 @@ float Integral::update(float error) {
   _previousTimeStamp = _clockSource();
 
   _outputValue += error * dt;
+  if (_isLimitSet) {
+    if (_outputValue > _maxLimit) {
+      _outputValue = _maxLimit;
+    } else if (_outputValue < _minLimit) {
+      _outputValue = _minLimit;
+    }
+  }
   return _outputValue;
 }
 
 void Integral::setClockSource(ClockSource clockSource) { _clockSource = clockSource; }
+
+void Integral::setIntegralLimits(float min, float max) {
+  _minLimit = min;
+  _maxLimit = max;
+  _isLimitSet = true;
+}
 
 void Integral::reset() { _outputValue = 0; }
