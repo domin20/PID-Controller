@@ -33,3 +33,5 @@ float Derivative::update(float rawInputValue) {
 }
 
 void Derivative::setTimeConstant(float timeConstant) { _timeConstant = timeConstant; }
+
+float Derivative::getOutputValue() { return _outputValue; }
