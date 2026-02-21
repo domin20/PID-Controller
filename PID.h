@@ -1,7 +1,8 @@
 #pragma once
 
-#include "Derivative.h"
-#include "Integral.h"
+#include <stdint.h>
+
+using ClockSource = uint64_t (*)();
 
 class PID {
  public:
@@ -14,12 +15,13 @@ class PID {
   void setIntegralLimits(float min, float max);
   void setDerivativeTimeConstant(float timeConstant);
 
-  float getIntegralTermValue() { return _integral.getOutputValue(); }
-  float getDerivativeTermValue() { return _derivative.getOutputValue(); }
+  float getIntegralTermValue() { return _integralOutputValue; }
+  float getDerivativeTermValue() { return _derivativeOutputValue; }
 
   float update(float error);
 
  private:
+  ClockSource _clockSource = nullptr;
   float _proportionalGain;
   float _integralGain;
   float _derivativeGain;
@@ -28,6 +30,15 @@ class PID {
   float _integralTermResultValue = 0.0f;
   float _derivativeTermResultValue = 0.0f;
 
-  Integral _integral;
-  Derivative _derivative;
+  float _integralOutputValue = 0;
+  uint64_t _integralPreviousTimeStamp = 0;
+
+  float _minIntegralLimit;
+  float _maxIntegralLimit;
+  bool _isIntegralLimitSet = false;
+
+  uint64_t _derivativePreviousTimeStamp = 0;
+  float _derivativePreviousError = 0;
+  float _derivativeOutputValue = 0;
+  float _derivativeTimeConstant = 1.0f;
 };
